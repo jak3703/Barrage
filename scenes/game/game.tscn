@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/game/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/game.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/game_TimerLabel.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/game_player.gd" type="Script" id=4]
+
+[node name="game" type="Control"]
+margin_right = 1080.0
+margin_bottom = 2220.0
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TimerLabel" type="Label" parent="."]
+margin_right = 44.0
+margin_bottom = 14.0
+rect_scale = Vector2( 6, 6 )
+script = ExtResource( 3 )
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 545, 1975 )
+script = ExtResource( 4 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

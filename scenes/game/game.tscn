@@ -13,8 +13,9 @@ script = ExtResource( 2 )
 [node name="Timer" type="Timer" parent="."]
 
 [node name="TimerLabel" type="Label" parent="."]
-margin_right = 44.0
-margin_bottom = 14.0
+margin_left = 40.0
+margin_top = 60.0
+margin_right = 80.0
 rect_scale = Vector2( 6, 6 )
 script = ExtResource( 3 )
 

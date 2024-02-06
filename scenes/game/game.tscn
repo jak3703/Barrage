@@ -6,8 +6,8 @@
 [ext_resource path="res://scenes/game/game_player.gd" type="Script" id=4]
 
 [node name="game" type="Control"]
-margin_right = 1080.0
-margin_bottom = 2220.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]

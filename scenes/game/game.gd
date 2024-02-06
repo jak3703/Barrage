@@ -25,7 +25,7 @@ func _game_init():
 	GS.currentScore = "0 " + GS.currentTime;
 	
 	var player = self.get_node("./player");
-	player.set_position(GS.PLAYER_START_POS);
+	#player.set_position(GS.PLAYER_START_POS);
 	PLAYER_RADIUS = int(ceil(player.get_node("Sprite").texture.get_width() / 2));
 	
 	spawn_target();

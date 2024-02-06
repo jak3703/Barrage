@@ -12,6 +12,4 @@ var currentTime = "60";
 # the velocity is maximized. also nice.
 var optimalDragDistance = 420
 
-var PLAYER_START_POS = Vector2(545, 1900);
-
 var PLAYER_MAX_DIST = 3000;

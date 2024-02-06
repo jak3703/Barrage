@@ -5,6 +5,7 @@ var hits = 0;
 var current_target = null;
 var TARGET_NODE = preload("res://scenes/game/target/target.tscn");
 var PLAYER_RADIUS = 75;
+onready var PLAYER_START_POS: Vector2 = get_node('player').rect_position;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,9 +25,9 @@ func _game_init():
 	# reset the current score
 	GS.currentScore = "0 " + GS.currentTime;
 	
-	var player = self.get_node("./player");
+	var player = self.get_node('player');
 	#player.set_position(GS.PLAYER_START_POS);
-	PLAYER_RADIUS = int(ceil(player.get_node("Sprite").texture.get_width() / 2));
+	PLAYER_RADIUS = int(ceil(player.get_node("KinematicBody2D/Sprite").texture.get_width() / 2));
 	
 	spawn_target();
 	
@@ -49,8 +50,8 @@ func _game_over():
 	
 
 func get_drag_data(position: Vector2):
-	var inXBounds: bool = position.x >= GS.PLAYER_START_POS.x - PLAYER_RADIUS and position.x <= GS.PLAYER_START_POS.x + PLAYER_RADIUS;
-	var inYBounds: bool = position.y >= GS.PLAYER_START_POS.y - PLAYER_RADIUS and position.y <= GS.PLAYER_START_POS.y + PLAYER_RADIUS;
+	var inXBounds: bool = position.x >= PLAYER_START_POS.x - PLAYER_RADIUS and position.x <= PLAYER_START_POS.x + PLAYER_RADIUS;
+	var inYBounds: bool = position.y >= PLAYER_START_POS.y - PLAYER_RADIUS and position.y <= PLAYER_START_POS.y + PLAYER_RADIUS;
 	if inXBounds and inYBounds:
 		var canLaunch = true;
 		# can_drop_data is only called if get_drag_data returns a data value for it. 
@@ -62,8 +63,8 @@ func can_drop_data(_position: Vector2, _data):
 
 func drop_data(position: Vector2, _data):
 	# commence launch
-	var dist_from_ball_X = position.x - GS.PLAYER_START_POS.x;
-	var dist_from_ball_Y = position.y - GS.PLAYER_START_POS.y;
+	var dist_from_ball_X = position.x - PLAYER_START_POS.x;
+	var dist_from_ball_Y = position.y - PLAYER_START_POS.y;
 	var ball_vector = Vector2(dist_from_ball_X, dist_from_ball_Y);
 	var drag_dist = ball_vector.distance_to(Vector2(0, 0));
 	var launch_power = compute_launch_power(drag_dist, GS.optimalDragDistance);
@@ -89,4 +90,4 @@ func reset_player(isHit: bool):
 		hits += 1;
 		current_target.queue_free();
 		spawn_target();
-	get_node("./player").set_position(GS.PLAYER_START_POS);
+	get_node("./player").set_position(PLAYER_START_POS);

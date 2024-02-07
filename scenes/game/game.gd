@@ -14,8 +14,9 @@ func _ready():
 func spawn_target():
 	var new_target = TARGET_NODE.instance();
 	var target_radius = new_target.get_target_radius();
-	var x = randi() % (1080 - 2*target_radius) + target_radius;
-	var y = randi() % (1200 - 2*target_radius) + target_radius;
+	var spawn_box_size = get_node("TargetBox").rect_size;
+	var x = randi() % int(spawn_box_size.x - 2*target_radius) + target_radius;
+	var y = randi() % int(spawn_box_size.y - 2*target_radius) + target_radius;
 	var new_target_pos = Vector2(x, y);
 	new_target.get_node("StaticBody2D").set_position(new_target_pos);
 	self.add_child(new_target);
@@ -91,6 +92,8 @@ func reset_player(isHit: bool):
 		hits += 1;
 		current_target.queue_free();
 		spawn_target();
-	pass
 	player_node.reset_player_position();
-	pass
+
+
+func _on_game_resized():
+	PLAYER_START_POS = get_node("player").rect_position; # Replace with function body.

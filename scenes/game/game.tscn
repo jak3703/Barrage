@@ -28,4 +28,11 @@ margin_top = -450.0
 margin_bottom = -450.0
 script = ExtResource( 4 )
 
+[node name="TargetBox" type="Control" parent="."]
+anchor_left = 0.05
+anchor_top = 0.02
+anchor_right = 0.95
+anchor_bottom = 0.47
+
+[connection signal="resized" from="." to="." method="_on_game_resized"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

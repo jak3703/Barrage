@@ -70,9 +70,6 @@ func drop_data(position: Vector2, _data):
 	var ball_vector = Vector2(dist_from_ball_X, dist_from_ball_Y);
 	var drag_dist = ball_vector.distance_to(Vector2(0, 0));
 	var launch_power = compute_launch_power(drag_dist, GS.optimalDragDistance);
-	#print(str(ball_vector.x) + " " + str(ball_vector.y));
-	#print(drag_dist);
-	#print(launch_power);
 	if launch_power == 0:
 		return;
 	var player_node = get_node("./player");

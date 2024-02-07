@@ -5,6 +5,7 @@ var hits = 0;
 var current_target = null;
 var TARGET_NODE = preload("res://scenes/game/target/target.tscn");
 var PLAYER_RADIUS = 75;
+var launch_count = 0;
 onready var PLAYER_START_POS: Vector2 = get_node('player').rect_position;
 
 # Called when the node enters the scene tree for the first time.
@@ -60,7 +61,7 @@ func get_drag_data(position: Vector2):
 		return canLaunch;
 
 func can_drop_data(_position: Vector2, _data):
-	return true;
+	return launch_count < 2;
 
 func drop_data(position: Vector2, _data):
 	# commence launch
@@ -77,8 +78,9 @@ func drop_data(position: Vector2, _data):
 	var player_node = get_node("./player");
 	player_node.speed = launch_power;
 	player_node.direction = ball_vector;
-	
-	
+	launch_count += 1;
+	if launch_count >= 2:
+		get_node("player/Ghost").visible = false;
 
 func compute_launch_power(drag_dist, optimal_dist):
 	var power = -0.011536*pow(optimal_dist - drag_dist, 2) + 1800;
@@ -92,6 +94,8 @@ func reset_player(isHit: bool):
 		hits += 1;
 		current_target.queue_free();
 		spawn_target();
+	launch_count = 0;
+	get_node("player/Ghost").visible = true;
 	player_node.reset_player_position();
 
 

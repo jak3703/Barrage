@@ -86,8 +86,11 @@ func compute_launch_power(drag_dist, optimal_dist):
 	return power;
 
 func reset_player(isHit: bool):
+	var player_node = get_node("player")
 	if isHit:
 		hits += 1;
 		current_target.queue_free();
 		spawn_target();
-	get_node("./player").set_position(PLAYER_START_POS);
+	pass
+	player_node.reset_player_position();
+	pass

@@ -1,21 +1,10 @@
-extends KinematicBody2D
+extends Control
 
-onready var GS = get_node("/root/GameState");
 var direction = Vector2();
-var speed = 0
+var speed = 0;
 
-func _physics_process(delta):
-	var velocity = direction.normalized() * speed;
-	#print(str(direction.x) + " " + str(direction.y));
-	#print(speed);
-	var collision = move_and_collide(velocity * delta);
-	if collision:
-		stop_move();
-		get_parent().reset_player(true);
-	elif GS.PLAYER_START_POS.distance_to(self.get_position()) > GS.PLAYER_MAX_DIST:
-		stop_move();
-		get_parent().reset_player(false);
+func reset_player_position():
+	var child = self.get_node("KinematicBody2D");
+	child.set_position(Vector2(0, 0));
 
-func stop_move():
-	speed = 0;
-	direction = Vector2();
+

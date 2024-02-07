@@ -27,10 +27,10 @@ func _load_best_score():
 		Directory.new().remove("user://savegame.txt");
 		save_game.open("user://savegame.txt", File.WRITE);
 		save_game.store_string(GS.currentScore);
-		get_node("./BestScore").text = get_parent().format_score(GS.currentScore);
+		get_node("./BestScore").text = get_node('/root/main/master_parent/menu').format_score(GS.currentScore);
 		save_game.close();
 	elif best_score != "null":
-		get_node("./BestScore").text = get_parent().format_score(best_score);
+		get_node("./BestScore").text = get_node('/root/main/master_parent/menu').format_score(best_score);
 	
 	
 
